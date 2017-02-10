@@ -1,0 +1,12 @@
+[Unit]
+Description=mysql-binlog-fetch for host %i
+
+[Service]
+User=root
+WorkingDirectory=/etc/mysql-binlog-fetch/
+ExecStart=/usr/bin/mysql-binlog-fetch.sh -c mysql-binlog-fetch.cnf -g %i -s %i
+Restart=on-abort
+PIDFile=/srv/mysql/backup/mysqlbinlog/%i/mysql-binlog-fetch.pid
+
+[Install]
+WantedBy=multi-user.target

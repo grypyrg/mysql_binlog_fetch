@@ -1,0 +1,12 @@
+[Unit]
+Description=mysql-binlog-fetch - Status Updater for this host
+
+[Service]
+User=root
+WorkingDirectory=/etc/mysql-binlog-fetch/
+ExecStart=/usr/bin/mysql-binlog-fetch-status.sh -c mysql-binlog-fetch.cnf -p /var/run/restore/mysql-binlog-fetch-status.pid
+Restart=on-abort
+PIDFile=/var/run/mysql-binlog-fetch-status.pid
+
+[Install]
+WantedBy=multi-user.target

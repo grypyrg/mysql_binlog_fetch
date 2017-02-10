@@ -1,0 +1,12 @@
+[client_metadata]
+user=mysql-binlog-fetch
+password="SecurePassword1="
+host=localhost
+database=mysql_binlog_fetch
+
+
+[client_dbserver1]
+user=mysqlbinlog
+password="SecurePassword1="
+host=localhost
+
