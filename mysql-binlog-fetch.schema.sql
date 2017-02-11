@@ -64,5 +64,29 @@ BEGIN
             AND mysqlbinlog_path=in_mysqlbinlog_path;
 END;;
 
+DROP PROCEDURE IF EXISTS mysql_binlog_fetch_show_error_or_expired;;
+CREATE PROCEDURE mysql_binlog_fetch_show_error_or_expired()
+BEGIN
+    SELECT 
+        *
+    FROM mysql_binlog_fetch
+    WHERE 
+           (active = 1 AND last_updated < NOW() - INTERVAL 1 HOUR)
+        OR (active = 1 AND error = 1);
+END;;
+
+DROP PROCEDURE IF EXISTS mysql_binlog_fetch_show_running;;
+CREATE PROCEDURE mysql_binlog_fetch_show_running()
+BEGIN
+    SELECT 
+        *
+    FROM mysql_binlog_fetch
+    WHERE 
+        active = 1
+        AND error = 0
+        AND last_updated >= NOW() - INTERVAL 1 HOUR;
+END;;
+
+
 
 DELIMITER ;
